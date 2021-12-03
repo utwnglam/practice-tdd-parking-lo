@@ -28,7 +28,6 @@ public class ParkingLotTest {
   public void should_return_null_when_parking_lot_is_full_given_a_car() {
     ParkingLot parkingLot = new ParkingLot(1);
     parkingLot.park(new Car());
-
     Car car = new Car();
 
     Ticket ticket = parkingLot.park(car);

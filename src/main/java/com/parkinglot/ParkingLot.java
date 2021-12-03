@@ -1,5 +1,7 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.NoAvailablePositionException;
+
 import java.util.HashMap;
 
 public class ParkingLot {
@@ -21,7 +23,7 @@ public class ParkingLot {
       parkingLotMap.put(ticketToBeReturn, car);
       return ticketToBeReturn;
     }
-    return null;
+    throw new NoAvailablePositionException("No available position.");
   }
 
   public Car fetch(Ticket ticket) {
@@ -30,4 +32,5 @@ public class ParkingLot {
     }
     return null;
   }
+  "Unrecognized parking ticket."
 }
