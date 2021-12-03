@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class ParkingLot {
   static final int DEFAULT_CAPACITY = 10;
   private final int capacity;
-  HashMap<Ticket, Car> parkingLotMap = new HashMap<>();
+  private final HashMap<Ticket, Car> parkingLotMap = new HashMap<>();
 
   public ParkingLot() {
     this.capacity = DEFAULT_CAPACITY;
@@ -36,5 +36,9 @@ public class ParkingLot {
 
   public int getAvailablePosition() {
     return capacity - parkingLotMap.size();
+  }
+
+  public boolean contains(Ticket ticket) {
+    return parkingLotMap.containsKey(ticket);
   }
 }

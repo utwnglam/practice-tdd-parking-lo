@@ -37,8 +37,8 @@ public class ParkingBoyTest {
 
   @Test
   public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
-    ParkingLot firstParkingLot = new ParkingLot();
-    ParkingLot secondParkingLot = new ParkingLot();
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    ParkingLot secondParkingLot = new ParkingLot(1);
     List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
 
     ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
