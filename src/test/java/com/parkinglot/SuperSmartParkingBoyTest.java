@@ -39,25 +39,25 @@ public class SuperSmartParkingBoyTest {
     assertThat(secondParkingLot.contains(ticket)).isEqualTo(true);
   }
 
-//  @Test
-//  public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
-//    ParkingLot firstParkingLot = new ParkingLot();
-//    ParkingLot secondParkingLot = new ParkingLot();
-//    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
-//
-//    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
-//    Car firstParkedCar = new Car();
-//    Ticket firstTicket = firstParkingLot.park(firstParkedCar);
-//    Car secondParkedCar = new Car();
-//    Ticket secondTicket = secondParkingLot.park(secondParkedCar);
-//
-//    Car carFetchFromFirstTicket = smartParkingBoy.fetch(firstTicket);
-//    Car carFetchFromSecondTicket = smartParkingBoy.fetch(secondTicket);
-//
-//    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
-//    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
-//  }
-//
+  @Test
+  public void should_return_right_when_parking_given_super_parking_boy_manage_two_parking_lots_and_both_have_1car() {
+    ParkingLot firstParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
+
+    SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+    Car firstParkedCar = new Car();
+    Ticket firstTicket = firstParkingLot.park(firstParkedCar);
+    Car secondParkedCar = new Car();
+    Ticket secondTicket = secondParkingLot.park(secondParkedCar);
+
+    Car carFetchFromFirstTicket = superSmartParkingBoy.fetch(firstTicket);
+    Car carFetchFromSecondTicket = superSmartParkingBoy.fetch(secondTicket);
+
+    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
+    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
+  }
+
 //  @Test
 //  public void should_return_nothing_when_fetching_given_smart_parking_boy_manage_two_parking_lots_and_unrecognized_ticket() {
 //    ParkingLot firstParkingLot = new ParkingLot();

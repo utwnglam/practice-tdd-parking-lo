@@ -6,7 +6,8 @@ import com.parkinglot.exception.UnrecognizedTicketException;
 import java.util.HashMap;
 
 public class ParkingLot {
-  static final int DEFAULT_CAPACITY = 10;
+  private static final int DEFAULT_CAPACITY = 10;
+
   private final int capacity;
   private final HashMap<Ticket, Car> parkingLotMap = new HashMap<>();
 
@@ -32,6 +33,10 @@ public class ParkingLot {
       return parkingLotMap.remove(ticket);
     }
     throw new UnrecognizedTicketException("Unrecognized parking ticket.");
+  }
+
+  public int getCapacity() {
+    return capacity;
   }
 
   public int getAvailablePosition() {
