@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SuperSmartParkingBoyTest {
   @Test
-  public void should_park_to_first_lot_when_parking_given_super_smart_parking_boy_manage_2lots_and_both_same_available_parking_rate() {
+  public void should_park_to_first_lot_when_parking_given_super_smart_park_boy_manage_2lots_and_both_same_available_parking_rate() {
     ParkingLot firstParkingLot = new ParkingLot();
     ParkingLot secondParkingLot = new ParkingLot();
     List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
@@ -26,19 +26,19 @@ public class SuperSmartParkingBoyTest {
     assertEquals(10, secondParkingLot.getAvailablePosition());
   }
 
-//  @Test
-//  public void should_park_to_second_lot_when_parking_given_smart_parking_boy_manage_2lots_and_second_more_position() {
-//    ParkingLot firstParkingLot = new ParkingLot();
-//    ParkingLot secondParkingLot = new ParkingLot();
-//    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
-//    firstParkingLot.park(new Car());
-//
-//    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
-//    Ticket ticket = smartParkingBoy.park(new Car());
-//
-//    assertThat(secondParkingLot.contains(ticket)).isEqualTo(true);
-//  }
-//
+  @Test
+  public void should_park_to_second_lot_when_parking_given_super_smart_park_boy_manage_2lots_and_2nd_larger_available_rate() {
+    ParkingLot firstParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
+    firstParkingLot.park(new Car());
+
+    SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+    Ticket ticket = superSmartParkingBoy.park(new Car());
+
+    assertThat(secondParkingLot.contains(ticket)).isEqualTo(true);
+  }
+
 //  @Test
 //  public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
 //    ParkingLot firstParkingLot = new ParkingLot();
