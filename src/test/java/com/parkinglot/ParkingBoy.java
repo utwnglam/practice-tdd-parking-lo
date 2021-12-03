@@ -1,5 +1,7 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.UnrecognizedTicketException;
+
 import java.util.List;
 
 public class ParkingBoy {
@@ -18,10 +20,11 @@ public class ParkingBoy {
   }
 
   public Car fetch(Ticket ticket) {
-    return parkingLots.stream()
-      .filter(parkingLot -> parkingLot.contains(ticket))
-      .findFirst()
-      .get()
-      .fetch(ticket);
+    for (ParkingLot parkingLot : parkingLots) {
+      if (parkingLot.contains(ticket)) {
+        return parkingLot.fetch(ticket);
+      }
+    }
+    throw new UnrecognizedTicketException("Unrecognized parking ticket.");
   }
 }
