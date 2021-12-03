@@ -32,5 +32,5 @@ public class ParkingLot {
     }
     return null;
   }
-  "Unrecognized parking ticket."
+
 }
