@@ -56,4 +56,19 @@ public class ParkingLotTest {
     Car car = parkingLot.fetch(ticket);
     assertNull(car);
   }
+
+  @Test
+  public void should_return_2_correct_cars_when_fetching_given_2_tickets() {
+    ParkingLot parkingLot = new ParkingLot(10);
+    Car firstParkedCar = new Car();
+    Ticket firstTicket = parkingLot.park(firstParkedCar);
+    Car secondParkedCar = new Car();
+    Ticket secondTicket = parkingLot.park(secondParkedCar);
+
+    Car carFetchFromFirstTicket = parkingLot.fetch(firstTicket);
+    Car carFetchFromSecondTicket = parkingLot.fetch(secondTicket);
+
+    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
+    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
+  }
 }
