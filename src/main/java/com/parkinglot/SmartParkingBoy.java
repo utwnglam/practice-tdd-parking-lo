@@ -14,6 +14,4 @@ public class SmartParkingBoy extends ParkingBoy{
     ParkingLot parkingLotMorePosition = Collections.max(this.getParkingLots(), Comparator.comparing(ParkingLot::getAvailablePosition));
     return parkingLotMorePosition.park(car);
   }
-
-
 }
