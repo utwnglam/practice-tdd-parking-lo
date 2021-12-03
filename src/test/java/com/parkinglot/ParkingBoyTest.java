@@ -34,4 +34,23 @@ public class ParkingBoyTest {
     assertEquals(9, firstParkingLot.getAvailablePosition());
     assertEquals(10, secondParkingLot.getAvailablePosition());
   }
+
+  @Test
+  public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
+    ParkingLot firstParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
+
+    ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+    Car firstParkedCar = new Car();
+    Ticket firstTicket = parkingBoy.park(firstParkedCar);
+    Car secondParkedCar = new Car();
+    Ticket secondTicket = parkingBoy.park(secondParkedCar);
+
+    Car carFetchFromFirstTicket = parkingBoy.fetch(firstTicket);
+    Car carFetchFromSecondTicket = parkingBoy.fetch(secondTicket);
+
+    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
+    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
+  }
 }
