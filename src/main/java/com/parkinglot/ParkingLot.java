@@ -20,14 +20,14 @@ public class ParkingLot {
       Ticket ticketToBeReturn = new Ticket();
       parkingLotMap.put(ticketToBeReturn, car);
       return ticketToBeReturn;
-    } else return null;
+    }
+    return null;
   }
 
   public Car fetch(Ticket ticket) {
     if (ticket != null) {
-      Car carToBeReturn = parkingLotMap.get(ticket);
-      parkingLotMap.remove(ticket);
-      return carToBeReturn;
-    } else return null;
+      return parkingLotMap.remove(ticket);
+    }
+    return null;
   }
 }

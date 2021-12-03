@@ -1,9 +1,9 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.*;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
   @Test
@@ -70,5 +70,17 @@ public class ParkingLotTest {
 
     assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
     assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
+  }
+
+  @Test
+  public void should_throw_no_available_position_exception_when_parking_given_parking_lot_no_capacity() {
+    ParkingLot parkingLot = new ParkingLot(1);
+    parkingLot.park(new Car());
+    Car car = new Car();
+
+    NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+      parkingLot.park(car);
+    });
+    assertEquals("No available position.", noAvailablePositionException.getMessage());
   }
 }
