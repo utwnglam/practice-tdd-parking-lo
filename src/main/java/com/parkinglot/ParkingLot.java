@@ -34,4 +34,7 @@ public class ParkingLot {
     throw new UnrecognizedTicketException("Unrecognized parking ticket.");
   }
 
+  public int getAvailablePosition() {
+    return 0;
+  }
 }

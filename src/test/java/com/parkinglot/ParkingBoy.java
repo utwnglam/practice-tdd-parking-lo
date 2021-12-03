@@ -1,9 +1,11 @@
 package com.parkinglot;
 
-public class ParkingBoy {
-  private ParkingLot parkingLot;
+import java.util.List;
 
-  public ParkingBoy(ParkingLot parkingLot) {
+public class ParkingBoy {
+  private List<ParkingLot> parkingLot;
+
+  public ParkingBoy(List<ParkingLot> parkingLot) {
     this.parkingLot = parkingLot;
   }
 
