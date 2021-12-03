@@ -12,13 +12,15 @@ public class ParkingLot {
 
   public Ticket park(Car car) {
     if (parkingLotMap.size() < capacity) {
-      Ticket newTicket = new Ticket();
-      parkingLotMap.put(newTicket, car);
-      return newTicket;
+      Ticket ticketToBeReturn = new Ticket();
+      parkingLotMap.put(ticketToBeReturn, car);
+      return ticketToBeReturn;
     } else return null;
   }
 
   public Car fetch(Ticket ticket) {
-    return new Car();
+    if (ticket != null) {
+      return parkingLotMap.get(ticket);
+    } else return null;
   }
 }
