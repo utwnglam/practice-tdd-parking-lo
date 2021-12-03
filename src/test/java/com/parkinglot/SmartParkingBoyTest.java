@@ -40,24 +40,24 @@ public class SmartParkingBoyTest {
     assertThat(secondParkingLot.contains(ticket)).isEqualTo(true);
   }
 
-//  @Test
-//  public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
-//    ParkingLot firstParkingLot = new ParkingLot(1);
-//    ParkingLot secondParkingLot = new ParkingLot(1);
-//    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
-//
-//    ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
-//    Car firstParkedCar = new Car();
-//    Ticket firstTicket = parkingBoy.park(firstParkedCar);
-//    Car secondParkedCar = new Car();
-//    Ticket secondTicket = parkingBoy.park(secondParkedCar);
-//
-//    Car carFetchFromFirstTicket = parkingBoy.fetch(firstTicket);
-//    Car carFetchFromSecondTicket = parkingBoy.fetch(secondTicket);
-//
-//    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
-//    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
-//  }
+  @Test
+  public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
+    ParkingLot firstParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
+
+    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
+    Car firstParkedCar = new Car();
+    Ticket firstTicket = firstParkingLot.park(firstParkedCar);
+    Car secondParkedCar = new Car();
+    Ticket secondTicket = secondParkingLot.park(secondParkedCar);
+
+    Car carFetchFromFirstTicket = smartParkingBoy.fetch(firstTicket);
+    Car carFetchFromSecondTicket = smartParkingBoy.fetch(secondTicket);
+
+    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
+    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
+  }
 
 //  @Test
 //  public void should_return_nothing_when_fetching_given_parking_boy_manage_two_parking_lots_and_unrecognized_ticket() {
