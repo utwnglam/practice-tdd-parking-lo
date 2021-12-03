@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
 
 import java.util.List;
@@ -12,11 +13,15 @@ public class ParkingBoy {
   }
 
   public Ticket park(Car car) {
-    return parkingLots.stream()
-      .filter(parkingLot -> parkingLot.getAvailablePosition() > 0)
-      .findFirst()
-      .get()
-      .park(car);
+    try {
+      return parkingLots.stream()
+        .filter(parkingLot -> parkingLot.getAvailablePosition() > 0)
+        .findFirst()
+        .get()
+        .park(car);
+    } catch (Exception exception) {
+      throw new NoAvailablePositionException("No available position.");
+    }
   }
 
   public Car fetch(Ticket ticket) {
