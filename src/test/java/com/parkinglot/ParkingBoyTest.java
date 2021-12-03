@@ -67,6 +67,14 @@ public class ParkingBoyTest {
       parkingBoy.fetch(new Ticket());
     });
     assertEquals("Unrecognized parking ticket.", unrecognizedWrongTicket.getMessage());
+  }
+
+  @Test
+  public void should_return_nothing_when_fetching_given_parking_boy_manage_two_parking_lots_and_used_ticket() {
+    ParkingLot firstParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
+    ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
 
     // used ticket
     Ticket ticket = parkingBoy.park(new Car());
