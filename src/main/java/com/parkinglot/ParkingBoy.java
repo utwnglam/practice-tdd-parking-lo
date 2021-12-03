@@ -6,7 +6,7 @@ import com.parkinglot.exception.UnrecognizedTicketException;
 import java.util.List;
 
 public class ParkingBoy {
-  private List<ParkingLot> parkingLots;
+  private final List<ParkingLot> parkingLots;
 
   public ParkingBoy(List<ParkingLot> parkingLot) {
     this.parkingLots = parkingLot;

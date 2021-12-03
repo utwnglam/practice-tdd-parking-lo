@@ -1,7 +1,5 @@
 package com.parkinglot;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class SuperSmartParkingBoy extends SmartParkingBoy {
