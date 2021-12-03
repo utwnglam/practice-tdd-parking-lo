@@ -59,19 +59,20 @@ public class SmartParkingBoyTest {
     assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
   }
 
-//  @Test
-//  public void should_return_nothing_when_fetching_given_parking_boy_manage_two_parking_lots_and_unrecognized_ticket() {
-//    ParkingLot firstParkingLot = new ParkingLot();
-//    ParkingLot secondParkingLot = new ParkingLot();
-//    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
-//    ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
-//
-//    UnrecognizedTicketException unrecognizedWrongTicket = assertThrows(UnrecognizedTicketException.class, () -> {
-//      parkingBoy.fetch(new Ticket());
-//    });
-//    assertEquals("Unrecognized parking ticket.", unrecognizedWrongTicket.getMessage());
-//  }
-//
+  @Test
+  public void should_return_nothing_when_fetching_given_smart_parking_boy_manage_two_parking_lots_and_unrecognized_ticket() {
+    ParkingLot firstParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
+
+    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
+
+    UnrecognizedTicketException unrecognizedWrongTicket = assertThrows(UnrecognizedTicketException.class, () -> {
+      smartParkingBoy.fetch(new Ticket());
+    });
+    assertEquals("Unrecognized parking ticket.", unrecognizedWrongTicket.getMessage());
+  }
+
 //  @Test
 //  public void should_return_nothing_when_fetching_given_parking_boy_manage_two_parking_lots_and_used_ticket() {
 //    ParkingLot firstParkingLot = new ParkingLot();
@@ -86,7 +87,7 @@ public class SmartParkingBoyTest {
 //    });
 //    assertEquals("Unrecognized parking ticket.", unrecognizedUsedTicket.getMessage());
 //  }
-//
+
 //  @Test
 //  public void should_return_nothing_when_parking_given_parking_boy_manage_two_parking_lots_and_both_unavailable() {
 //    ParkingLot firstParkingLot = new ParkingLot(1);
