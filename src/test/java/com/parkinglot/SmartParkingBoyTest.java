@@ -27,6 +27,19 @@ public class SmartParkingBoyTest {
     assertEquals(10, secondParkingLot.getAvailablePosition());
   }
 
+  @Test
+  public void should_park_to_second_lot_when_parking_given_smart_parking_boy_manage_2lots_and_second_more_position() {
+    ParkingLot firstParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
+    firstParkingLot.park(new Car());
+
+    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList);
+    Ticket ticket = smartParkingBoy.park(new Car());
+
+    assertThat(secondParkingLot.contains(ticket)).isEqualTo(true);
+  }
+
 //  @Test
 //  public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
 //    ParkingLot firstParkingLot = new ParkingLot(1);
@@ -45,7 +58,7 @@ public class SmartParkingBoyTest {
 //    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
 //    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
 //  }
-//
+
 //  @Test
 //  public void should_return_nothing_when_fetching_given_parking_boy_manage_two_parking_lots_and_unrecognized_ticket() {
 //    ParkingLot firstParkingLot = new ParkingLot();
