@@ -3,7 +3,8 @@ package com.parkinglot;
 import java.util.HashMap;
 
 public class ParkingLot {
-  private int capacity;
+  static final int DEFAULT_CAPACITY = 10;
+  private final int capacity;
   HashMap<Ticket, Car> parkingLotMap = new HashMap<>();
 
   public ParkingLot(int capacity) {
