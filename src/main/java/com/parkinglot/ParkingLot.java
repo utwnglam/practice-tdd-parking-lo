@@ -35,6 +35,6 @@ public class ParkingLot {
   }
 
   public int getAvailablePosition() {
-    return 0;
+    return capacity - parkingLotMap.size();
   }
 }
