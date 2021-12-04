@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.UnrecognizedTicketException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -60,7 +61,7 @@ public class ParkingLotManagerTest {
   }
 
   @Test
-  public void should_return_right_when_parking_given_parking_boy_manage_two_parking_lots_and_both_have_1car() {
+  public void should_return_right_when_parking_given_parking_manager_manage_two_parking_lots_and_both_have_1car() {
     List<ParkingBoy> managementList = Arrays.asList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
     ParkingLot seventhParkingLot = new ParkingLot(1);
     ParkingLot eighthParkingLot = new ParkingLot(1);
@@ -77,5 +78,20 @@ public class ParkingLotManagerTest {
 
     assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
     assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
+  }
+
+  @Test
+  public void should_return_nothing_when_fetching_given_parking_manager_manage_two_parking_lots_and_unrecognized_ticket() {
+    List<ParkingBoy> managementList = Arrays.asList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
+    ParkingLot seventhParkingLot = new ParkingLot();
+    ParkingLot eighthParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(seventhParkingLot, eighthParkingLot);
+
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    UnrecognizedTicketException unrecognizedWrongTicket = assertThrows(UnrecognizedTicketException.class, () -> {
+      parkingLotManager.fetch(new Ticket());
+    });
+    assertEquals("Unrecognized parking ticket.", unrecognizedWrongTicket.getMessage());
   }
 }
