@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -110,5 +111,23 @@ public class ParkingLotManagerTest {
       parkingLotManager.fetch(ticket);
     });
     assertEquals("Unrecognized parking ticket.", unrecognizedUsedTicket.getMessage());
+  }
+
+  @Test
+  public void should_return_nothing_when_parking_given_parking_manager_manage_two_parking_lots_and_both_unavailable() {
+    List<ParkingBoy> managementList = Arrays.asList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
+    ParkingLot seventhParkingLot = new ParkingLot(1);
+    ParkingLot eighthParkingLot = new ParkingLot(1);
+    List<ParkingLot> parkingLotList = Arrays.asList(seventhParkingLot, eighthParkingLot);
+
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    seventhParkingLot.park(new Car());
+    eighthParkingLot.park(new Car());
+
+    NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+      parkingLotManager.park(new Car());
+    });
+    assertEquals("No available position.", noAvailablePositionException.getMessage());
   }
 }
