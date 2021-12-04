@@ -151,6 +151,6 @@ public class ParkingLotManagerTest {
 
     assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
     assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
-    assertThat(carFetchFromSecondTicket).isEqualTo(carFetchFromThirdTicket);
+    assertThat(carFetchFromThirdTicket).isEqualTo(thirdParkedCar);
   }
 }

@@ -15,10 +15,10 @@ public class ParkingLotManager extends ParkingBoy {
   }
 
   public Ticket tellBoyToPark(Car car, ParkingBoy parkingBoy) {
-    return null;
+    return parkingBoy.park(car);
   }
 
   public Car tellBoyToFetch(Ticket ticket, ParkingBoy parkingBoy) {
-    return null;
+    return parkingBoy.fetch(ticket);
   }
 }
