@@ -171,4 +171,48 @@ public class ParkingLotManagerTest {
     });
     assertEquals("Parking boy is not managed by this parking manager.", boyNotInManagementListException2.getMessage());
   }
+
+  @Test
+  public void should_return_exception_from_manager_when_fetching_given_parkingBoys_throw_exception_with_wrong_ticket() {
+    List<ParkingBoy> managementList = Collections.singletonList(parkingBoy);
+    List<ParkingLot> parkingLotList = Collections.emptyList();
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    UnrecognizedTicketException wrongTicketException = assertThrows(UnrecognizedTicketException.class, () -> {
+      parkingLotManager.tellBoyToFetch(new Ticket(), parkingBoy);
+    });
+    assertEquals("Manager: Unrecognized parking ticket.", wrongTicketException.getMessage());
+  }
+
+  @Test
+  public void should_return_exception_from_manager_when_fetching_given_parkingBoys_throw_exception_with_used_ticket() {
+    List<ParkingBoy> managementList = Collections.singletonList(smartParkingBoy);
+    List<ParkingLot> parkingLotList = Collections.emptyList();
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    Ticket ticket = parkingLotManager.tellBoyToPark(new Car(), smartParkingBoy);
+    parkingLotManager.tellBoyToFetch(ticket, smartParkingBoy);
+    UnrecognizedTicketException usedTicketException = assertThrows(UnrecognizedTicketException.class, () -> {
+      parkingLotManager.tellBoyToFetch(ticket, smartParkingBoy);
+    });
+    assertEquals("Manager: Unrecognized parking ticket.", usedTicketException.getMessage());
+  }
+
+  @Test
+  public void should_return_exception_from_manager_when_park_or_fetch_given_parkingBoys_throw_exception() {
+    ParkingLot seventhParkingLot = new ParkingLot(1);
+    ParkingLot eighthParkingLot = new ParkingLot(1);
+    SuperSmartParkingBoy newSuperSmartParkingBoy = new SuperSmartParkingBoy(Arrays.asList(seventhParkingLot, eighthParkingLot));
+    seventhParkingLot.park(new Car());
+    eighthParkingLot.park(new Car());
+
+    List<ParkingBoy> managementList = Collections.singletonList(newSuperSmartParkingBoy);
+    List<ParkingLot> parkingLotList = Collections.emptyList();
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+      parkingLotManager.tellBoyToPark(new Car(), newSuperSmartParkingBoy);
+    });
+    assertEquals("Manager: No available position.", noAvailablePositionException.getMessage());
+  }
 }

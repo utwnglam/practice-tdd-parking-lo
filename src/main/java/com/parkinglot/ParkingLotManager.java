@@ -3,13 +3,18 @@ package com.parkinglot;
 import com.parkinglot.exception.BoyNotInManagementListException;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ParkingLotManager extends ParkingBoy {
-  private List<ParkingBoy> managementList;
+public class ParkingLotManager extends ParkingBoy implements Observer {
+  private final List<ParkingBoy> managementList;
 
   public ParkingLotManager(List<ParkingBoy> managementList, List<ParkingLot> parkingLot) {
     super(parkingLot);
     this.managementList = managementList;
+    for (ParkingBoy parkingBoy : managementList) {
+      parkingBoy.addObserver(this);
+    }
   }
 
   public boolean contains(ParkingBoy parkingBoy) {
@@ -28,5 +33,14 @@ public class ParkingLotManager extends ParkingBoy {
       return parkingBoy.fetch(ticket);
     }
     throw new BoyNotInManagementListException("Parking boy is not managed by this parking manager.");
+  }
+
+  @Override
+  public void update(Observable observable, Object exceptionFromBoys) {
+    try {
+      throw (Throwable) exceptionFromBoys;
+    } catch (Throwable e) {
+      e.printStackTrace();
+    }
   }
 }
