@@ -29,7 +29,7 @@ public class SuperSmartParkingBoyTest {
   @Test
   public void should_park_to_second_lot_when_parking_given_super_smart_park_boy_manage_2lots_and_2nd_larger_available_rate() {
     ParkingLot firstParkingLot = new ParkingLot();
-    ParkingLot secondParkingLot = new ParkingLot();
+    ParkingLot secondParkingLot = new ParkingLot(6);
     List<ParkingLot> parkingLotList = Arrays.asList(firstParkingLot, secondParkingLot);
     firstParkingLot.park(new Car());
 

@@ -11,7 +11,9 @@ public class SmartParkingBoy extends ParkingBoy{
 
   @Override
   public Ticket park(Car car) {
-    ParkingLot parkingLotMorePosition = Collections.max(this.getParkingLots(), Comparator.comparing(ParkingLot::getAvailablePosition));
+    ParkingLot parkingLotMorePosition = Collections.max(
+      this.getParkingLots(), Comparator.comparing(ParkingLot::getAvailablePosition)
+    );
     return parkingLotMorePosition.park(car);
   }
 }
