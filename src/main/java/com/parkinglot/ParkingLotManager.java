@@ -13,4 +13,12 @@ public class ParkingLotManager extends ParkingBoy {
   public boolean contains(ParkingBoy parkingBoy) {
     return managementList.contains(parkingBoy);
   }
+
+  public Ticket tellBoyToPark(Car car, ParkingBoy parkingBoy) {
+    return null;
+  }
+
+  public Car tellBoyToFetch(Ticket ticket, ParkingBoy parkingBoy) {
+    return null;
+  }
 }

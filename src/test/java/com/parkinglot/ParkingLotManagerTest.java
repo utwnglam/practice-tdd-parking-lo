@@ -17,20 +17,21 @@ public class ParkingLotManagerTest {
   private ParkingBoy parkingBoy;
   private SmartParkingBoy smartParkingBoy;
   private SuperSmartParkingBoy superSmartParkingBoy;
+  private ParkingLot firstParkingLot, thirdParkingLot, fifthParkingLot;
 
   @BeforeEach
   public void setup() {
-    ParkingLot firstParkingLot = new ParkingLot();
+    firstParkingLot = new ParkingLot();
     ParkingLot secondParkingLot = new ParkingLot();
     List<ParkingLot> parkingBoyLotList = Arrays.asList(firstParkingLot, secondParkingLot);
     parkingBoy = new ParkingBoy(parkingBoyLotList);
 
-    ParkingLot thirdParkingLot = new ParkingLot();
+    thirdParkingLot = new ParkingLot();
     ParkingLot fourthParkingLot = new ParkingLot();
     List<ParkingLot> smartParkingBoyLotList = Arrays.asList(thirdParkingLot, fourthParkingLot);
     smartParkingBoy = new SmartParkingBoy(smartParkingBoyLotList);
 
-    ParkingLot fifthParkingLot = new ParkingLot();
+    fifthParkingLot = new ParkingLot();
     ParkingLot sixthParkingLot = new ParkingLot();
     List<ParkingLot> superSmartParkingBoyLotList = Arrays.asList(fifthParkingLot, sixthParkingLot);
     superSmartParkingBoy = new SuperSmartParkingBoy(superSmartParkingBoyLotList);
@@ -129,5 +130,27 @@ public class ParkingLotManagerTest {
       parkingLotManager.park(new Car());
     });
     assertEquals("No available position.", noAvailablePositionException.getMessage());
+  }
+
+  @Test
+  public void should_return_correct_car_when_parking_given_parking_manager_manage_three_parking_boys() {
+    List<ParkingBoy> managementList = Arrays.asList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
+    List<ParkingLot> parkingLotList = Collections.emptyList();
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    Car firstParkedCar = new Car();
+    Ticket firstTicket = parkingLotManager.tellBoyToPark(firstParkedCar, parkingBoy);
+    Car secondParkedCar = new Car();
+    Ticket secondTicket = parkingLotManager.tellBoyToPark(secondParkedCar, smartParkingBoy);
+    Car thirdParkedCar = new Car();
+    Ticket thirdTicket = parkingLotManager.tellBoyToPark(thirdParkedCar, superSmartParkingBoy);
+
+    Car carFetchFromFirstTicket = parkingLotManager.tellBoyToFetch(firstTicket, parkingBoy);
+    Car carFetchFromSecondTicket = parkingLotManager.tellBoyToFetch(secondTicket, smartParkingBoy);
+    Car carFetchFromThirdTicket = parkingLotManager.tellBoyToFetch(thirdTicket, superSmartParkingBoy);
+
+    assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
+    assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
+    assertThat(carFetchFromSecondTicket).isEqualTo(carFetchFromThirdTicket);
   }
 }
