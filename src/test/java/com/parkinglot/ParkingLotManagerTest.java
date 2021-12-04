@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.BoyNotInManagementListException;
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
 import org.junit.jupiter.api.BeforeEach;
@@ -152,5 +153,22 @@ public class ParkingLotManagerTest {
     assertThat(carFetchFromFirstTicket).isEqualTo(firstParkedCar);
     assertThat(carFetchFromSecondTicket).isEqualTo(secondParkedCar);
     assertThat(carFetchFromThirdTicket).isEqualTo(thirdParkedCar);
+  }
+
+  @Test
+  public void should_return_exception_when_park_or_fetch_given_parkingBoys_not_managed_by_parkingManager() {
+    List<ParkingBoy> managementList = Collections.emptyList();
+    List<ParkingLot> parkingLotList = Collections.emptyList();
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    BoyNotInManagementListException boyNotInManagementListException1 = assertThrows(BoyNotInManagementListException.class, () -> {
+      parkingLotManager.tellBoyToPark(new Car(), parkingBoy);
+    });
+    assertEquals("Unrecognized parking ticket.", boyNotInManagementListException1.getMessage());
+
+    BoyNotInManagementListException boyNotInManagementListException2 = assertThrows(BoyNotInManagementListException.class, () -> {
+      parkingLotManager.tellBoyToFetch(new Ticket(), parkingBoy);
+    });
+    assertEquals("Unrecognized parking ticket.", boyNotInManagementListException2.getMessage());
   }
 }
