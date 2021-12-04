@@ -94,4 +94,21 @@ public class ParkingLotManagerTest {
     });
     assertEquals("Unrecognized parking ticket.", unrecognizedWrongTicket.getMessage());
   }
+
+  @Test
+  public void should_return_nothing_when_fetching_given_parking_manager_manage_two_parking_lots_and_used_ticket() {
+    List<ParkingBoy> managementList = Arrays.asList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
+    ParkingLot seventhParkingLot = new ParkingLot();
+    ParkingLot eighthParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(seventhParkingLot, eighthParkingLot);
+
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+
+    Ticket ticket = parkingLotManager.park(new Car());
+    parkingLotManager.fetch(ticket);
+    UnrecognizedTicketException unrecognizedUsedTicket = assertThrows(UnrecognizedTicketException.class, () -> {
+      parkingLotManager.fetch(ticket);
+    });
+    assertEquals("Unrecognized parking ticket.", unrecognizedUsedTicket.getMessage());
+  }
 }
