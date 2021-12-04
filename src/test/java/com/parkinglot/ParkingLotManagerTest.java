@@ -4,10 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParkingLotManagerTest {
   private ParkingBoy parkingBoy;
@@ -35,11 +37,25 @@ public class ParkingLotManagerTest {
   @Test
   public void should_return_true_when_add_parkingBoy_to_list_given_parkingLotManager_have_managementList() {
     List<ParkingBoy> managementList = Arrays.asList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
+    List<ParkingLot> parkingLotList = Collections.emptyList();
 
-    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList);
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
     assertTrue(parkingLotManager.contains(parkingBoy));
   }
 
-//  SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
-//  SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy();
+  @Test
+  public void should_park_to_first_lot_when_parking_given_parking_manager_manage_two_parking_lots_and_both_available() {
+    List<ParkingBoy> managementList = Arrays.asList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
+
+    ParkingLot seventhParkingLot = new ParkingLot();
+    ParkingLot eighthParkingLot = new ParkingLot();
+    List<ParkingLot> parkingLotList = Arrays.asList(seventhParkingLot, eighthParkingLot);
+
+    ParkingLotManager parkingLotManager = new ParkingLotManager(managementList, parkingLotList);
+    Ticket ticket = parkingLotManager.park(new Car());
+
+    assertNotNull(ticket);
+    assertEquals(9, seventhParkingLot.getAvailablePosition());
+    assertEquals(10, eighthParkingLot.getAvailablePosition());
+  }
 }
