@@ -1,6 +1,8 @@
 package com.parkinglot;
 
 import com.parkinglot.exception.BoyNotInManagementListException;
+import com.parkinglot.exception.NoAvailablePositionException;
+import com.parkinglot.exception.UnrecognizedTicketException;
 
 import java.util.List;
 import java.util.Observable;
@@ -36,11 +38,12 @@ public class ParkingLotManager extends ParkingBoy implements Observer {
   }
 
   @Override
-  public void update(Observable observable, Object exceptionFromBoys) {
-    try {
-      throw (Throwable) exceptionFromBoys;
-    } catch (Throwable e) {
-      e.printStackTrace();
+  public void update(Observable observable, Object message) {
+    String messageFromBoy = (String) message;
+    if (messageFromBoy.contains("No available")) {
+      throw new NoAvailablePositionException(messageFromBoy);
+    } else if (messageFromBoy.contains("Unrecognized parking ticket")) {
+      throw new UnrecognizedTicketException(messageFromBoy);
     }
   }
 }

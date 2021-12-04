@@ -1,7 +1,6 @@
 package com.parkinglot;
 
 import com.parkinglot.exception.NoAvailablePositionException;
-import com.parkinglot.exception.UnrecognizedTicketException;
 
 import java.util.HashMap;
 
@@ -32,7 +31,7 @@ public class ParkingLot {
     if (parkingLotMap.containsKey(ticket) && ticket != null) {
       return parkingLotMap.remove(ticket);
     }
-    throw new UnrecognizedTicketException("Unrecognized parking ticket.");
+    return null;
   }
 
   public int getCapacity() {

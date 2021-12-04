@@ -25,7 +25,7 @@ public class ParkingBoy extends Observable {
         throw new NoAvailablePositionException("No available position.");
       } else {
         setChanged();
-        notifyObservers(new NoAvailablePositionException("Manager: No available position."));
+        notifyObservers("Manager: No available position.");
         return null;
       }
     }
@@ -41,7 +41,7 @@ public class ParkingBoy extends Observable {
       throw new UnrecognizedTicketException("Unrecognized parking ticket.");
     } else {
       setChanged();
-      notifyObservers(new UnrecognizedTicketException("Manager: Unrecognized parking ticket."));
+      notifyObservers("Manager: Unrecognized parking ticket.");
       return null;
     }
   }

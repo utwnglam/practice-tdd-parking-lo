@@ -18,21 +18,20 @@ public class ParkingLotManagerTest {
   private ParkingBoy parkingBoy;
   private SmartParkingBoy smartParkingBoy;
   private SuperSmartParkingBoy superSmartParkingBoy;
-  private ParkingLot firstParkingLot, thirdParkingLot, fifthParkingLot;
 
   @BeforeEach
   public void setup() {
-    firstParkingLot = new ParkingLot();
+    ParkingLot firstParkingLot = new ParkingLot();
     ParkingLot secondParkingLot = new ParkingLot();
     List<ParkingLot> parkingBoyLotList = Arrays.asList(firstParkingLot, secondParkingLot);
     parkingBoy = new ParkingBoy(parkingBoyLotList);
 
-    thirdParkingLot = new ParkingLot();
+    ParkingLot thirdParkingLot = new ParkingLot();
     ParkingLot fourthParkingLot = new ParkingLot();
     List<ParkingLot> smartParkingBoyLotList = Arrays.asList(thirdParkingLot, fourthParkingLot);
     smartParkingBoy = new SmartParkingBoy(smartParkingBoyLotList);
 
-    fifthParkingLot = new ParkingLot();
+    ParkingLot fifthParkingLot = new ParkingLot();
     ParkingLot sixthParkingLot = new ParkingLot();
     List<ParkingLot> superSmartParkingBoyLotList = Arrays.asList(fifthParkingLot, sixthParkingLot);
     superSmartParkingBoy = new SuperSmartParkingBoy(superSmartParkingBoyLotList);
@@ -199,7 +198,7 @@ public class ParkingLotManagerTest {
   }
 
   @Test
-  public void should_return_exception_from_manager_when_park_or_fetch_given_parkingBoys_throw_exception() {
+  public void should_return_exception_from_manager_when_parking_given_parkingBoys_throw_exception_and_no_space() {
     ParkingLot seventhParkingLot = new ParkingLot(1);
     ParkingLot eighthParkingLot = new ParkingLot(1);
     SuperSmartParkingBoy newSuperSmartParkingBoy = new SuperSmartParkingBoy(Arrays.asList(seventhParkingLot, eighthParkingLot));
