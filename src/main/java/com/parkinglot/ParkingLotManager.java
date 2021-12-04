@@ -1,5 +1,7 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.BoyNotInManagementListException;
+
 import java.util.List;
 
 public class ParkingLotManager extends ParkingBoy {
@@ -15,10 +17,16 @@ public class ParkingLotManager extends ParkingBoy {
   }
 
   public Ticket tellBoyToPark(Car car, ParkingBoy parkingBoy) {
-    return parkingBoy.park(car);
+    if (contains(parkingBoy)) {
+      return parkingBoy.park(car);
+    }
+    throw new BoyNotInManagementListException("Parking boy is not managed by this parking manager.");
   }
 
   public Car tellBoyToFetch(Ticket ticket, ParkingBoy parkingBoy) {
-    return parkingBoy.fetch(ticket);
+    if (contains(parkingBoy)) {
+      return parkingBoy.fetch(ticket);
+    }
+    throw new BoyNotInManagementListException("Parking boy is not managed by this parking manager.");
   }
 }

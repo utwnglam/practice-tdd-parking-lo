@@ -164,11 +164,11 @@ public class ParkingLotManagerTest {
     BoyNotInManagementListException boyNotInManagementListException1 = assertThrows(BoyNotInManagementListException.class, () -> {
       parkingLotManager.tellBoyToPark(new Car(), parkingBoy);
     });
-    assertEquals("Unrecognized parking ticket.", boyNotInManagementListException1.getMessage());
+    assertEquals("Parking boy is not managed by this parking manager.", boyNotInManagementListException1.getMessage());
 
     BoyNotInManagementListException boyNotInManagementListException2 = assertThrows(BoyNotInManagementListException.class, () -> {
       parkingLotManager.tellBoyToFetch(new Ticket(), parkingBoy);
     });
-    assertEquals("Unrecognized parking ticket.", boyNotInManagementListException2.getMessage());
+    assertEquals("Parking boy is not managed by this parking manager.", boyNotInManagementListException2.getMessage());
   }
 }
