@@ -18,14 +18,14 @@ public class ParkingBoy extends Observable {
       return parkingLots.stream()
         .filter(parkingLot -> parkingLot.getAvailablePosition() > 0)
         .findFirst()
-        .get()
+        .get()// orElseThrow
         .park(car);
     } catch (Exception exception) {
       if (countObservers() == 0) {
         throw new NoAvailablePositionException("No available position.");
       } else {
         setChanged();
-        notifyObservers("Manager: No available position.");
+        notifyObservers(ParkingLotManager.NoAvailablePositionManagerMessage);
         return null;
       }
     }
@@ -41,7 +41,7 @@ public class ParkingBoy extends Observable {
       throw new UnrecognizedTicketException("Unrecognized parking ticket.");
     } else {
       setChanged();
-      notifyObservers("Manager: Unrecognized parking ticket.");
+      notifyObservers();
       return null;
     }
   }

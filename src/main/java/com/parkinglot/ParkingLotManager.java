@@ -10,6 +10,9 @@ import java.util.Observer;
 
 public class ParkingLotManager extends ParkingBoy implements Observer {
   private final List<ParkingBoy> managementList;
+  private final String notManagedExceptionMessage = "Parking boy is not managed by this parking manager.";
+  public static String NoAvailablePositionManagerMessage = "Manager: No available position.";
+  public static String UnrecognizedTicketManagerMessage = "Manager: Unrecognized parking ticket.";
 
   public ParkingLotManager(List<ParkingBoy> managementList, List<ParkingLot> parkingLot) {
     super(parkingLot);
@@ -19,31 +22,31 @@ public class ParkingLotManager extends ParkingBoy implements Observer {
     }
   }
 
-  public boolean contains(ParkingBoy parkingBoy) {
-    return managementList.contains(parkingBoy);
-  }
-
   public Ticket tellBoyToPark(Car car, ParkingBoy parkingBoy) {
     if (contains(parkingBoy)) {
       return parkingBoy.park(car);
     }
-    throw new BoyNotInManagementListException("Parking boy is not managed by this parking manager.");
+    throw new BoyNotInManagementListException(notManagedExceptionMessage);
   }
 
   public Car tellBoyToFetch(Ticket ticket, ParkingBoy parkingBoy) {
     if (contains(parkingBoy)) {
       return parkingBoy.fetch(ticket);
     }
-    throw new BoyNotInManagementListException("Parking boy is not managed by this parking manager.");
+    throw new BoyNotInManagementListException(notManagedExceptionMessage);
+  }
+
+  public boolean contains(ParkingBoy parkingBoy) {
+    return managementList.contains(parkingBoy);
   }
 
   @Override
   public void update(Observable observable, Object message) {
     String messageFromBoy = (String) message;
-    if (messageFromBoy.contains("No available")) {
-      throw new NoAvailablePositionException(messageFromBoy);
-    } else if (messageFromBoy.contains("Unrecognized parking ticket")) {
-      throw new UnrecognizedTicketException(messageFromBoy);
+    if (messageFromBoy.contains(NoAvailablePositionManagerMessage)) {
+      throw new NoAvailablePositionException(NoAvailablePositionManagerMessage);
+    } else if (messageFromBoy.contains(UnrecognizedTicketManagerMessage)) {
+      throw new UnrecognizedTicketException(UnrecognizedTicketManagerMessage);
     }
   }
 }
